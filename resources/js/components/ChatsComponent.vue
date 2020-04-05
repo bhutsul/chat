@@ -49,6 +49,11 @@
 
         created() {
             this.fetchMessages();
+
+            Echo.join('chat')
+                .listen('MessageSent',(event) => {
+                    this.message.push(event.message);
+                })
         },
 
         methods: {

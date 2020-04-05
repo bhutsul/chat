@@ -29,7 +29,7 @@ class ChatsController extends Controller
             'message' => $request->message,
         ]);
 
-        broadcast(new MessageSent($message));
+        broadcast(new MessageSent($message->load('user')));
 
         return ['status' => 'success'];
     }
