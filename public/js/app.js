@@ -1944,9 +1944,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  props: ['user'],
+  data: function data() {
+    return {
+      messages: [],
+      newMessage: ''
+    };
+  },
+  created: function created() {
+    this.fetchMessages();
+  },
+  methods: {
+    fetchMessages: function fetchMessages() {
+      var _this = this;
+
+      axios.get('messages').then(function (response) {
+        _this.messages = response.data;
+      });
+    },
+    sendMessage: function sendMessage() {
+      this.messages.push({
+        user: this.user,
+        message: this.newMessage
+      });
+      axios.post('messages', {
+        message: this.newMessage
+      });
+      this.newMessage = '';
+    }
   }
 });
 
@@ -46809,58 +46837,85 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-8" }, [
+      _c("div", { staticClass: "card card-default" }, [
+        _c("div", { staticClass: "card-header" }, [_vm._v("Messages")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body p-0" }, [
+          _c(
+            "ul",
+            {
+              staticClass: "list-unstyled",
+              staticStyle: { height: "300px", "overflow-y": "scrloll" }
+            },
+            _vm._l(_vm.messages, function(message, index) {
+              return _c("li", { key: index, staticClass: "p-2" }, [
+                _c("strong", [_vm._v(_vm._s(message.user.name))]),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(message.message) +
+                    "\n                    "
+                )
+              ])
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.newMessage,
+              expression: "newMessage"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            name: "message",
+            placeholder: "Enter your message..."
+          },
+          domProps: { value: _vm.newMessage },
+          on: {
+            keyup: function($event) {
+              if (
+                !$event.type.indexOf("key") &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.sendMessage($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.newMessage = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "text-muted" }, [_vm._v("user is typing...")])
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-8" }, [
-        _c("div", { staticClass: "card card-default" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("Messages")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body p-0" }, [
-            _c(
-              "ul",
-              {
-                staticClass: "list-unstyled",
-                staticStyle: { height: "300px", "overflow-y": "scrloll" }
-              },
-              [
-                _c("li", { staticClass: "p-2" }, [
-                  _c("strong", [_vm._v("Harish")]),
-                  _vm._v(
-                    "\n                        dskfjndsjfn\n                    "
-                  )
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              name: "message",
-              placeholder: "Enter your message..."
-            }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "text-muted" }, [
-            _vm._v("user is typing...")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-4" }, [
-        _c("div", { staticClass: "card card-default" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("Active Users")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("ul", [_c("li", { staticClass: "py-2" }, [_vm._v("Harish")])])
-          ])
+    return _c("div", { staticClass: "col-4" }, [
+      _c("div", { staticClass: "card card-default" }, [
+        _c("div", { staticClass: "card-header" }, [_vm._v("Active Users")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("ul", [_c("li", { staticClass: "py-2" }, [_vm._v("Harish")])])
         ])
       ])
     ])
