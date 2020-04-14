@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Group;
 use App\Message;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -33,6 +34,6 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('chat');
+        return new PresenceChannel('group.'.$this->message->group->id);
     }
 }

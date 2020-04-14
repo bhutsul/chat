@@ -17,10 +17,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/create', function () {
+    return view('pages.create-group');
+})->name('create');
+Route::get('/invitations', function () {
+    return view('pages.group-invitations');
+})->name('invitations');
+Route::get('/show', 'Pages\GroupController@show')->name('show');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/chats', 'ChatsController@index');
-Route::get('/messages', 'ChatsController@fetchMessages');
-Route::post('/messages', 'ChatsController@sendMessage');
+Route::get('/group/{id}', 'Pages\GroupController@index');
+Route::get('/group/{id}/messages', 'Pages\GroupController@fetchMessages');
+Route::post('/messages', 'Pages\GroupController@sendMessage');

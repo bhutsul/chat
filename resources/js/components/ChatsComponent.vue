@@ -49,14 +49,16 @@
                newMessage: '',
                users: [],
                activeUser: false,
-               typingTimer: false
+               typingTimer: false,
+               group_id: 0
            }
         },
 
         created() {
+            this.group_id = window.location.href.split('/').pop();
             this.fetchMessages();
 
-            Echo.join('chat')
+            Echo.join('group.' + this.group_id)
                 .here(user => {
                     this.users = user;
                 })
@@ -84,7 +86,7 @@
 
         methods: {
             fetchMessages() {
-                axios.get('messages').then(response => {
+                axios.get(this.group_id + '/messages/').then(response => {
                     this.messages = response.data;
                 })
             },
@@ -95,13 +97,13 @@
                     message: this.newMessage
                 });
 
-                axios.post('messages', {message: this.newMessage});
+                axios.post('/messages', {message: this.newMessage, group_id: this.group_id});
 
                 this.newMessage = '';
             },
 
             sendTypingEvent() {
-                Echo.join('chat')
+                Echo.join('group.' + this.group_id)
                     .whisper('typing', this.user);
             }
 
