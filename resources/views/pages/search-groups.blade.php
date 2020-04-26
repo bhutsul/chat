@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="container">
-        <invitations :invitations="{{ $invitations }}" ></invitations>
+        <search :user="{{ auth()->user() }}"></search>
     </div>
 @endsection

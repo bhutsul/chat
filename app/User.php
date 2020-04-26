@@ -41,4 +41,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class);
     }
+
+    public function invites()
+    {
+        return $this->hasMany('App\Invitations', 'to_user_id', 'id');
+    }
+
+    public function userToGroup()
+    {
+        return $this->hasMany('App\UserToGroup','user_id','id');
+    }
+
+    public function groups()
+    {
+        return $this->hasManyThrough('App\Group', 'App\UserToGroup', 'user_id', 'id', 'id', 'group_id')->where('confirmed', 1);
+    }
 }

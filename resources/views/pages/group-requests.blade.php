@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="container">
-        <invitations :invitations="{{ $invitations }}" ></invitations>
+        <requests :requests="{{ $requests }}" ></requests>
     </div>
 @endsection

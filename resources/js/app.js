@@ -10,6 +10,11 @@ window.Vue = require('vue');
 
 import VueChatScroll from 'vue-chat-scroll'
 Vue.use(VueChatScroll)
+import Vue from 'vue'
+import VueSwal from 'vue-swal'
+import { TabsPlugin } from 'bootstrap-vue'
+Vue.use(TabsPlugin)
+Vue.use(VueSwal)
 
 /**
  * The following block of code may be used to automatically register your
@@ -23,6 +28,10 @@ Vue.use(VueChatScroll)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('chats', require('./components/ChatsComponent.vue').default);
+Vue.component('search', require('./components/SearchComponent.vue').default);
+Vue.component('edit-group', require('./components/EditGroup.vue').default);
+Vue.component('invitations', require('./components/InvitationsComponent.vue').default);
+Vue.component('requests', require('./components/RequestsComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

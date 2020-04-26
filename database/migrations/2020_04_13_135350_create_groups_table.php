@@ -17,6 +17,7 @@ class CreateGroupsTable extends Migration
             $table->increments('id');
             $table->text('name');
             $table->boolean('status');
+            $table->integer('admin_id')->unsigned();
             $table->timestamps();
         });
     }
