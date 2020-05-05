@@ -45,6 +45,7 @@ class RequestsController extends Controller
         $request_user = Requests::whereId($this->request->request_id)->where('to_user_id', Auth::id())->first();
         UserToGroup::where('user_id', $request_user->from_user_id)->where('group_id', $this->request->group_id)->delete();
         Requests::whereId($this->request->request_id)->where('to_user_id', Auth::id())->delete();
+
         return response()->json(['status' => 'success']);
     }
 
@@ -53,6 +54,7 @@ class RequestsController extends Controller
         $request_user = Requests::whereId($this->request->request_id)->where('to_user_id', Auth::id())->first();
         UserToGroup::where('user_id', $request_user->from_user_id)->where('group_id', $this->request->group_id)->update(['confirmed' => 1]);
         Requests::whereId($this->request->request_id)->where('to_user_id', Auth::id())->delete();
+
         return response()->json(['status' => 'success']);
     }
 }

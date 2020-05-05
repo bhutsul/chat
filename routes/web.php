@@ -30,7 +30,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/group/{id}', 'Pages\GroupController@index');
 Route::get('/group/{id}/messages', 'Pages\GroupController@fetchMessages');
-Route::get('/group/{id}/edit', 'Pages\GroupController@edit');
+Route::get('/group/{id}/edit', 'Pages\GroupController@edit')->middleware('group');
 Route::get('/myGroups', 'Pages\GroupController@showMyGroups')->name('showMyGroups');
 Route::get('/allGroups', 'Pages\GroupController@showAllGroups')->name('showAllGroups');
 Route::post('/messages', 'Pages\GroupController@sendMessage');

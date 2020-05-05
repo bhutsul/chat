@@ -61,6 +61,7 @@ class GroupController extends Controller
             'group_id' => $group_id,
             'confirmed' => 1,
         ]);
+
         return redirect('myGroups');
     }
 
@@ -129,6 +130,7 @@ class GroupController extends Controller
     {
         $group_id = (int)$group_id;
         $group = Group::with('messages')->where('id', $group_id)->first();
+
         return $group->messages;
     }
 

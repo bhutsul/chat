@@ -40,9 +40,9 @@
                                 </ul>
                             </div>
                         </b-tab>
-                        <b-tab title="Invite user">
+                        <b-tab title="Invite a new user">
                             <div class="md-form mt-0">
-                                <input v-model="searchText" @keyup.enter="searchUser" name="search" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                                <input v-model="searchText" @keyup.enter="searchUser" autocomplete="off" name="search" class="form-control" type="text" placeholder="Search" aria-label="Search">
                                 <ul class="list-group" v-if="this.users.length != 0">
                                     <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(user, index) in users" :key="index">
                                         {{ user.name }}
